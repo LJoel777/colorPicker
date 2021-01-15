@@ -5,8 +5,21 @@ import Loading from "./Loading";
 import styled from "styled-components";
 
 const MainDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  .title {
+    padding: 20px;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    font-size: 50px;
+  }
+  .container {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+  }
 `;
 
 const Main = () => {
@@ -18,9 +31,15 @@ const Main = () => {
   let resultOffset = 0;
 
   useEffect(() => {
-    console.log("most");
     apiRequest();
   }, [resultOffset]);
+
+  window.onscroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      resultOffset += 10;
+      apiRequest();
+    }
+  };
 
   const apiRequest = () => {
     // setLoading(true);
@@ -35,7 +54,20 @@ const Main = () => {
     //   });
   };
 
-  return <MainDiv>{loading ? <Loading /> : list.map((palette, index) => <Palette palette={palette} key={index} />)}</MainDiv>;
+  return (
+    <MainDiv>
+      <h1 className="title">ColorLovers Palettes</h1>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="container">
+          {list.map((palette, index) => (
+            <Palette palette={palette} key={index} />
+          ))}
+        </div>
+      )}
+    </MainDiv>
+  );
 };
 
 export default Main;

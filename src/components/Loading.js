@@ -10,6 +10,12 @@ const LoadingDiv = styled.div`
   left: 0px;
   top: 0px;
   z-index: 100;
+  background-color: rgb(6, 148, 184);
+  color: white;
+  font-weight: 700;
+  span {
+    font-size: 29px;
+  }
   .content {
     display: flex;
     align-items: center;

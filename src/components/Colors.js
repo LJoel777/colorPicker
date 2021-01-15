@@ -4,15 +4,15 @@ import styled from "styled-components";
 const ColorsDiv = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  width: 100px;
+  padding-left: 20px;
   .color {
-    width: 10px;
-    height: 20px;
+    width: 30px;
+    height: 100px;
   }
 `;
 
 const Colors = (props) => {
-  const colors = ["9F1F63", "D61B5B", "F6DC32", "F69C1F", "67B7A8"];
+  const colors = props.colors;
   return (
     <ColorsDiv>
       <div className="color" style={{ background: `#${colors[0]}` }}></div>
