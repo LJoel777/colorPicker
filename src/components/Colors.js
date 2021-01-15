@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import screen from "../helpers/ScreenSizes";
 
 const ColorsDiv = styled.div`
   display: flex;
@@ -9,17 +10,23 @@ const ColorsDiv = styled.div`
     width: 30px;
     height: 100px;
   }
+
+  @media screen and (${screen.small}) {
+    padding-left: 0px;
+    .color {
+      margin-top: 10px;
+      width: 45px;
+    }
+  }
 `;
 
 const Colors = (props) => {
   const colors = props.colors;
   return (
     <ColorsDiv>
-      <div className="color" style={{ background: `#${colors[0]}` }}></div>
-      <div className="color" style={{ background: `#${colors[1]}` }}></div>
-      <div className="color" style={{ background: `#${colors[2]}` }}></div>
-      <div className="color" style={{ background: `#${colors[3]}` }}></div>
-      <div className="color" style={{ background: `#${colors[4]}` }}></div>
+      {colors.map((color, index) => (
+        <div className="color" style={{ background: `#${color}` }} key={index}></div>
+      ))}
     </ColorsDiv>
   );
 };

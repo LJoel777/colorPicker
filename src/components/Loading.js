@@ -14,6 +14,7 @@ const LoadingDiv = styled.div`
   color: white;
   font-weight: 700;
   span {
+    text-shadow: 2px 2px #0000005c;
     font-size: 29px;
   }
   .content {

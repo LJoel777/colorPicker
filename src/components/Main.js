@@ -3,9 +3,11 @@ import axios from "axios";
 import Palette from "./Palette";
 import Loading from "./Loading";
 import styled from "styled-components";
+import screen from "../helpers/ScreenSizes";
 
 const MainDiv = styled.div`
   .title {
+    text-shadow: 2px 2px #0000005c;
     padding: 20px;
     text-align: center;
     font-weight: 400;
@@ -20,30 +22,33 @@ const MainDiv = styled.div`
     justify-content: space-around;
     align-content: center;
   }
+  @media screen and (${screen.small}) {
+    .title {
+      font-size: 40px;
+    }
+  }
 `;
 
 const Main = () => {
-  const COLOR_LOVERS_API = "http://www.colourlovers.com/api/palettes/new?format=json&numResults=8";
+  const COLOR_LOVERS_API = "http://www.colourlovers.com/api/palettes/new?format=json&numResults=10";
   const HEROKU_CORS_HELPER = "https://cors-anywhere.herokuapp.com";
   const [palets, setPalets] = useState([]);
   const [loading, setLoading] = useState(false);
   const list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-  let resultOffset = 0;
+  const [resultOffset, setResultOffset] = useState(0);
 
   useEffect(() => {
-    apiRequest();
-  }, [resultOffset]);
+    getData();
+  }, []);
 
-  window.onwheel = () => {
-    console.log(window.innerHeight + window.scrollY);
-    console.log(document.body.offsetHeight);
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      resultOffset += 10;
-      apiRequest();
+  window.onscroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && !loading) {
+      setResultOffset(resultOffset + 10);
+      getData();
     }
   };
 
-  const apiRequest = () => {
+  const getData = () => {
     setLoading(true);
     axios(`${HEROKU_CORS_HELPER}/${COLOR_LOVERS_API}&resultOffset=${resultOffset}`)
       .then((res) => {
