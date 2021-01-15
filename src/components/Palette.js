@@ -5,7 +5,7 @@ import styled from "styled-components";
 const PaletteDiv = styled.div`
   padding: 20px;
   display: flex;
-  max-width: 700px;
+  width: 700px;
   justify-content: space-between;
   color: white;
   line-height: 30px;
@@ -43,19 +43,19 @@ const Palette = (props) => {
   return (
     <PaletteDiv>
       <div className="infos">
-        <h1>Toallthebrokenhearts</h1>
+        <h1>{palette.title}</h1>
         <p>
-          <span>Maker:</span> MistyAamen
+          <span>Maker:</span> {palette.userName}
         </p>
         <p>
-          <span>Created at:</span> 2021-01-15 04:45:14
+          <span>Created at:</span> {palette.dateCreated}
         </p>
         <div className="rating">
-          <p>340 views</p>
-          <p>2 vote</p>
+          <p>{palette.numViews} views</p>
+          <p>{palette.numVotes} vote</p>
         </div>
       </div>
-      <Colors colors={["9F1F63", "D61B5B", "F6DC32", "F69C1F", "67B7A8"]} />
+      <Colors colors={palette.colors} />
     </PaletteDiv>
   );
 };

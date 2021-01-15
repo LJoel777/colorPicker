@@ -23,7 +23,7 @@ const MainDiv = styled.div`
 `;
 
 const Main = () => {
-  const COLOR_LOVERS_API = "http://www.colourlovers.com/api/palettes/new?format=json&numResults=10";
+  const COLOR_LOVERS_API = "http://www.colourlovers.com/api/palettes/new?format=json&numResults=8";
   const HEROKU_CORS_HELPER = "https://cors-anywhere.herokuapp.com";
   const [palets, setPalets] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,9 @@ const Main = () => {
     apiRequest();
   }, [resultOffset]);
 
-  window.onscroll = () => {
+  window.onwheel = () => {
+    console.log(window.innerHeight + window.scrollY);
+    console.log(document.body.offsetHeight);
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       resultOffset += 10;
       apiRequest();
@@ -42,16 +44,16 @@ const Main = () => {
   };
 
   const apiRequest = () => {
-    // setLoading(true);
-    // axios(`${HEROKU_CORS_HELPER}/${COLOR_LOVERS_API}&resultOffset=${resultOffset}`)
-    //   .then((res) => {
-    //     setPalets(res.data);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     setLoading(false);
-    //   });
+    setLoading(true);
+    axios(`${HEROKU_CORS_HELPER}/${COLOR_LOVERS_API}&resultOffset=${resultOffset}`)
+      .then((res) => {
+        setPalets(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
   };
 
   return (
@@ -61,7 +63,7 @@ const Main = () => {
         <Loading />
       ) : (
         <div className="container">
-          {list.map((palette, index) => (
+          {palets.map((palette, index) => (
             <Palette palette={palette} key={index} />
           ))}
         </div>
