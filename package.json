@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --port 3000 --hot --open",
+    "start": "webpack-dev-server --port 4000 --hot --open",
     "build": "webpack --config webpack.config.js --mode production"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "css": "^3.0.0",
     "file-loader": "^6.2.0",

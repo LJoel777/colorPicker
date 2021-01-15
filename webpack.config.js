@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  devtool: "eval-source-map",
   output: {
     filename: "bundle.[hash].js",
     path: path.resolve(__dirname, "dist"),
@@ -28,7 +28,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.png|svg|jpg|gif$/,
+        test: /\.png|svg|jpg|gif|ico$/,
         use: ["file-loader"],
       },
     ],
